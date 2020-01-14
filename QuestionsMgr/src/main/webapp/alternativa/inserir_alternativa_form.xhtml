@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+  
+	<h:head>    
+		<title>Cadastro de Alternativas</title>
+	</h:head>
+  
+	<h:body>
+	  
+		<h3>Formulário de Cadastro de Alternativas</h3>
+		
+		<h3>
+			<h:form>
+			<h:commandLink value="Listagem de Alternativas" action="#{alternativaBean.listarForm}"/>
+			</h:form>
+		</h3>
+	  
+		<h4><h:outputLabel id="oplMensagem" value="#{alternativaBean.msg}"/></h4>
+	  
+		<h:form>
+		     <table>
+		    <tr>
+		        <td><h:outputText id="ldescricao" value="Descricao:" /></td>
+		        <td><h:inputText id="tdescricao" value="#{alternativaBean.alternativa.descricao}"/></td> 
+		    </tr>
+		    <tr>
+		        <td colspan="2">
+		        <h:commandButton id="submit"  type="submit" action="#{alternativaBean.adicionarAlternativa}" value="Salvar" />
+		        </td>
+		    </tr>
+		</table>  
+		  
+		</h:form>
+	  
+	</h:body>
+</html>

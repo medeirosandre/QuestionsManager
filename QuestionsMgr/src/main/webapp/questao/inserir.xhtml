@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  
+	<h:head>    
+		<title>Cadastro de Questões</title>
+	</h:head>
+  
+	<h:body>		
+		<h:form id="menu_form">
+			<p:growl id="mensagens" showDetail="true"/>
+		
+			<p:menubar>
+				<p:submenu label="Questão">
+					<p:menuitem value="Cadastrar" action="#{questaoBean.adicionarForm}"/>
+					<p:menuitem value="Listar" action="#{questaoBean.listarForm}"/>
+				</p:submenu>
+			</p:menubar>
+			
+			<p:panel id="cadastro" header="Formulário de Cadastro de Questões" style="margin-bottom:20px;margin-top:20px">
+		        <h:panelGrid columns="2" cellpadding="10">
+		            <h:outputText id="l_questao_descricao" value="Descrição:"/>
+		            <p:inputTextarea id="t_questao_descricao" value="#{questaoBean.questao.descricao}"
+	        			required="true" rows="3" cols="30" counter="display_quest" maxlength="150" counterTemplate="{0} caracteres restantes"/>
+	        		<h:outputText value=""/>
+	        		<h:outputText id="display_quest"/>
+		        </h:panelGrid>
+		        
+		        <p:panel id="alternativas" header="Alternativas">
+		        	<h:panelGrid columns="2" cellpadding="10">
+		        		<h:outputText id="l_questao_alt_descricao" value="Descrição:"/>
+		        		<p:inputTextarea id="t_questao_alt1_descricao" value="#{questaoBean.questao.alternativas[0].descricao}"
+		        			required="true" rows="3" cols="30" counter="display_alt1" maxlength="150" counterTemplate="{0} caracteres restantes"/>
+		        		<h:outputText value=""/>
+		        		<h:outputText id="display_alt1"/>
+		        		
+		        		<h:outputText id="l_questao_alt2_descricao" value="Descrição:"/>
+		        		<p:inputTextarea id="t_questao_alt2_descricao" value="#{questaoBean.questao.alternativas[1].descricao}"
+		        			required="true" rows="3" cols="30" counter="display_alt2" maxlength="150" counterTemplate="{0} caracteres restantes"/>
+		        		<h:outputText value=""/>
+		        		<h:outputText id="display_alt2"/>
+		        	</h:panelGrid>
+		        </p:panel>
+		    </p:panel>
+			
+			<p:commandButton value="Salvar" action="#{questaoBean.adicionarQuestao}" update="mensagens"/>
+		  
+		</h:form>
+	</h:body>
+</html>

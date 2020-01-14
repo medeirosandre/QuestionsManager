@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  
+	<h:head>
+	    <title>Listagem de Questões</title>
+	</h:head>
+	
+	<h:body>
+	
+		<h:form id="form">
+			<p:growl id="mensagens" showDetail="true"/>
+		
+			<p:menubar>
+				<p:submenu label="Questão">
+					<p:menuitem value="Cadastrar" action="#{questaoBean.adicionarForm}"/>
+					<p:menuitem value="Listar" action="#{questaoBean.listarForm}"/>
+				</p:submenu>
+			</p:menubar>
+		
+			<p:dataView id="questoesDataView" var="questao" value="#{questaoBean.listaQuestoes}" rows="12" paginator="true" rowsPerPageTemplate="6,12,16"
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                style="margin-bottom:20px;margin-top:20px">
+                
+    			<p:dataViewListItem>
+    				<h:panelGrid columns="2" style="width:100%" columnClasses="detalhes">
+    					
+    					<p:outputPanel>
+    						<h:panelGrid columns="2" cellpadding="5">
+    							<h:outputText value="Id:"/>
+    							<h:outputText value="#{questao.id}" style="font-weight: bold"/>
+    							
+    							<h:outputText value="Descrição:"/>
+    							<h:outputText value="#{questao.descricao}" style="font-weight: bold"/>
+    						</h:panelGrid>
+    					</p:outputPanel>
+    					
+    					<p:outputPanel>
+	    					<p:commandButton update="form:questaoEditarDetalhes" oncomplete="PF('questaoEditarDialog').show()" title="Editar Questão" icon="ui-icon-pencil">
+	    						<f:setPropertyActionListener value="#{questao}" target="#{questaoBean.questao}"/>
+	    					</p:commandButton>
+	    					<p:commandButton update="questoesDataView form:mensagens" title="Excluir Questão" icon="ui-icon-trash" action="#{questaoBean.excluirQuestao(questao.id)}"/>
+    					</p:outputPanel>
+    					
+    				</h:panelGrid>
+    			</p:dataViewListItem>
+                
+            </p:dataView>
+            
+            <p:dialog header="questaoEditar" widgetVar="questaoEditarDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            	<p:outputPanel id="questaoEditarDetalhes">
+            		<h:panelGrid columns="2" cellpadding="10" rendered="#{not empty questaoBean.questao}">
+			            <h:outputText id="l_questao_descricao" value="Descrição:"/>
+			            <p:inputTextarea id="t_questao_descricao" value="#{questaoBean.questao.descricao}"
+		        			required="true" rows="3" cols="30" counter="display_quest" maxlength="150" counterTemplate="{0} caracteres restantes"/>
+		        		<h:outputText value=""/>
+		        		<h:outputText id="display_quest"/>
+			        </h:panelGrid>
+            	</p:outputPanel>
+            </p:dialog>
+	
+		</h:form>
+	
+	</h:body>
+</html>
